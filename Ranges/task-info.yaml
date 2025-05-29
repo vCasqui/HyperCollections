@@ -1,0 +1,45 @@
+type: edu
+files:
+  - name: test/ActualRange.java
+    visible: false
+    learner_created: false
+  - name: test/BiMapTests.java
+    visible: false
+    learner_created: false
+  - name: test/Helper.java
+    visible: false
+    learner_created: false
+  - name: test/ImmutabilityTests.java
+    visible: false
+    learner_created: false
+  - name: test/MultisetTests.java
+    visible: false
+    learner_created: false
+  - name: test/QueueTests.java
+    visible: false
+    learner_created: false
+  - name: test/RangeTests.java
+    visible: false
+    learner_created: false
+  - name: src/collections/BiMap.java
+    visible: true
+    learner_created: true
+  - name: src/collections/Multiset.java
+    visible: true
+    learner_created: true
+  - name: src/collections/SizeLimitedQueue.java
+    visible: true
+    learner_created: true
+  - name: src/collections/ImmutableCollection.java
+    visible: true
+    learner_created: true
+  - name: src/collections/Range.java
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/25580#comment
+status: Unchecked
+feedback:
+  message: Please update your SDK to version 21. <a href="open_module_settings">Open
+    Project Settings</a>.
+  time: "Thu, 29 May 2025 20:12:17 UTC"
+record: -1

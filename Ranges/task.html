@@ -1,0 +1,58 @@
+<div class="step-text">
+<h5 id="description">Description</h5><p>A <strong>range</strong>, or "interval", defines the boundaries around a contiguous span of values of some Comparable type, for example, "integers from 1 to 100 inclusive".</p><p>Types of ranges:<strong> </strong>each end of a range may be bounded or unbounded. If bounded, there is an associated endpoint value, and the range is considered to be either <strong>open</strong> (doesn't include the endpoint) or <strong>closed</strong> (includes the endpoint) on that side. With three possibilities on each side, this yields nine basic types of ranges, enumerated below.</p><p>Notation:<strong> </strong>a square bracket<strong> </strong><code class="language-java">[</code> or <code class="language-java">]</code> indicates that the range is closed on that side, a parenthesis <code class="language-java">(</code> or <code class="language-java">)</code> means it is open, or unbounded. The construct <code class="language-java">{x | statement}</code> is read as "the set of all x such that...statement".</p><h5 id="objectives">Objectives</h5><p>In this stage, you have to implement the <code class="language-java">Range</code> class with the following endpoints:</p><table align="center" border="1" cellpadding="1" cellspacing="1"><tbody><tr><th><p>Notation</p></th><th><p>Definition</p></th><th><p>Factory Method</p></th></tr><tr><td><p>(a..b)</p></td><td><p>{x | a &lt; x &lt; b}</p></td><td><p>open(a, b)</p></td></tr><tr><td><p>[a..b]</p></td><td><p>{x | a &lt;= x &lt;= b}</p></td><td><p>closed(a, b)</p></td></tr><tr><td><p>(a..b]</p></td><td><p>{x | a &lt; x &lt;= b}</p></td><td><p>openClosed(a, b)</p></td></tr><tr><td><p>[a..b)</p></td><td><p>{x | a &lt;= x &lt; b}</p></td><td><p>closedOpen(a, b)</p></td></tr><tr><td><p>(a..+∞)</p></td><td><p>{x | x &gt; a}</p></td><td><p>greaterThan(a)</p></td></tr><tr><td><p>[a..+∞)</p></td><td><p>{x | x &gt;= a}</p></td><td><p>atLeast(a)</p></td></tr><tr><td><p>(-∞..b)</p></td><td><p>{x | x &lt; b}</p></td><td><p>lessThan(a)</p></td></tr><tr><td><p>(-∞..b]</p></td><td><p>{x | x &lt;= b}</p></td><td><p>atMost(a)</p></td></tr><tr><td><p>(-∞..+∞)</p></td><td><p>{x}</p></td><td><p>all()</p></td></tr></tbody></table><ul><li><p>Make the <code class="language-java">Range</code> class generic.</p></li><li><p>Each of the implemented factory methods should return an instance of the <code class="language-java">Range</code> object.</p></li><li><p>When both endpoints exist, the upper endpoint may not be less than the lower one. Otherwise, an <code class="language-java">IllegalArgumentException</code> must be thrown. The endpoints may be equal only if at least one of the bounds is closed.</p></li><li><p>Each method should throw a <code class="language-java">NullPointerException</code> if any of the provided arguments is null.</p></li><li><p>The arguments of the static factory method – a, b must implement the <code class="language-java">Comparable</code> interface from the Java Standard Library.</p></li><li><p>The <code class="language-java">Range</code> class can't be instantiated directly: you can get new instances through the factory method only.</p></li></ul><p>An instance of the <code class="language-java">Range</code> class should provide the following methods:</p><table align="center" border="1" cellpadding="1" cellspacing="1"><tbody><tr><th><p>Instance method</p></th><th><p>Definition</p></th></tr><tr><td><p>boolean contains(C value)</p></td><td><p>Returns <code class="language-java">true</code> if the value is within the bounds of this range</p></td></tr><tr><td><p>boolean encloses(Range&lt;C&gt; other)</p></td><td><p>Returns <code class="language-java">true</code> if the bounds of other ranges don't extend outside the bounds of this range</p></td></tr><tr><td><p>Range&lt;C&gt; intersection(Range&lt;C&gt; connectedRange)</p></td><td><p>Returns the maximal range enclosed by both this range and the <code class="language-java">connectedRange</code>, if such a range exists</p></td></tr><tr><td><p>Range&lt;C&gt; span(Range&lt;C&gt; other)</p></td><td><p>Returns the minimal range that encloses both this range and another</p></td></tr><tr><td><p>boolean isEmpty()</p></td><td><p>Returns <code class="language-java">true</code> if this range is of the form <code class="language-java">[v..v)</code> or <code class="language-java">(v..v]</code></p></td></tr></tbody></table><p><code class="language-java">C</code> in the table above stands for Comparable. To pass the tests, make sure to not </p><p>Some of the corner cases are the following:</p><ul><li><p><code class="language-java">[a..a]</code>: a singleton range,</p></li><li><p><code class="language-java">[a..a)</code>;<code class="language-java">(a..a]</code>: empty ranges – also valid, but should be printed as EMPTY,</p></li><li><p><code class="language-java">(a..a)</code>: invalid – an <code class="language-java">IllegalArgumentException</code> must be thrown.</p></li></ul><p>Helpful notes:</p><ul><li><p>Intersection with any <code class="language-java">EMPTY</code> range should be <code class="language-java">EMPTY</code></p></li><li><p><code class="language-java">EMPTY</code> range does not enclose any other range</p></li><li><p>Any range (except <code class="language-java">EMPTY</code> one) encloses <code class="language-java">EMPTY</code></p></li></ul><h5 id="examples">Examples</h5><p><strong>Example 1</strong>:<strong> </strong><em>usual cases</em></p><pre><code class="language-java">System.out.println(Range.open(1, 10)); //(1, 10)
+System.out.println(Range.closed(1, 10)); //[1, 10]
+System.out.println(Range.openClosed(1, 10)); //(1, 10]
+System.out.println(Range.closedOpen(1, 10)); //[1, 10)
+System.out.println(Range.greaterThan(1)); //(1, INF)
+System.out.println(Range.atLeast(1)); //[1, INF)
+System.out.println(Range.lessThan(10)); //(-INF, 10)
+System.out.println(Range.atMost(10)); //(-INF, 10]
+System.out.println(Range.all()); //(-INF, INF)</code></pre><p><strong>Example 2</strong>: <em>corner cases</em></p><pre><code class="language-java">System.out.println(Range.closed(1, 1)); //[1, 1]
+System.out.println(Range.openClosed(1, 1)); //EMPTY
+System.out.println(Range.closedOpen(1, 1)); //EMPTY</code></pre><p><strong>Example 3</strong>: <em>methods</em></p><pre><code class="language-java">System.out.println(Range.open(1, 10).contains(5)); //true
+System.out.println(Range.open(1, 10).contains(10)); //false
+System.out.println(Range.openClosed(1, 10).contains(10)); //true
+
+System.out.println(Range.closed(1, 10).encloses(Range.closed(5, 7))); //true
+System.out.println(Range.open(1, 10).encloses(Range.closedOpen(1, 10))); //false
+System.out.println(Range.closed(1, 10).encloses(Range.open(1, 10))); //true
+System.out.println(Range.all().encloses(Range.all())); //true
+
+System.out.println(Range.atMost(10).span(Range.closed(1, 5))); //(-INF, 10]
+System.out.println(Range.atMost(10).span(Range.atLeast(11))); //(-INF, INF)
+System.out.println(Range.all().span(Range.atMost(10))); //(-INF, INF)
+
+System.out.println(Range.all().intersection(Range.atLeast(5))); //[5, INF)
+System.out.println(Range.atMost(10).intersection(Range.greaterThan(10))); //EMPTY
+System.out.println(Range.closedOpen(1, 1).intersection(Range.openClosed(1, 1))); //EMPTY</code></pre><p><strong>Example 4</strong>: <em>examples for unusual methods cases</em></p><pre><code class="language-java">System.out.println(Range.openClosed(1, 1).contains(1)); //false
+System.out.println(Range.lessThan(10).contains(10)); //false
+System.out.println(Range.atMost(10).contains(10)); //true
+System.out.println(Range.greaterThan(10).contains(10)); //false
+System.out.println(Range.atLeast(10).contains(10)); //true
+
+System.out.println(Range.closed(0, 0).encloses(Range.closed(0, 0))); //true
+System.out.println(Range.openClosed(0, 5).encloses(Range.closedOpen(0, 0))); //true
+System.out.println(Range.closedOpen(0, 5).encloses(Range.openClosed(0, 5))); //false
+System.out.println(Range.openClosed(0, 0).encloses(Range.closedOpen(0, 5))); //false
+System.out.println(Range.openClosed(0, 0).encloses(Range.closedOpen(0, 0))); //false
+
+System.out.println(Range.closed(10,10).span(Range.closed(10,10))); //[10, 10]
+System.out.println(Range.closed(10,10).span(Range.openClosed(10,10))); //[10, 10]
+System.out.println(Range.closed(10,10).span(Range.closedOpen(10,10))); //[10, 10]
+System.out.println(Range.openClosed(10,10).span(Range.closed(10,10))); //[10, 10]
+System.out.println(Range.openClosed(10,10).span(Range.openClosed(10,10))); //EMPTY
+System.out.println(Range.openClosed(10,10).span(Range.closedOpen(10,10))); //EMPTY
+System.out.println(Range.closedOpen(10,10).span(Range.closed(10,10))); //[10, 10]
+System.out.println(Range.closedOpen(10,10).span(Range.openClosed(10,10))); //EMPTY
+System.out.println(Range.closedOpen(10,10).span(Range.closedOpen(10,10))); //EMPTY
+
+System.out.println(Range.closed(10,10).intersection(Range.closed(10,10))); //[10, 10]
+System.out.println(Range.closed(10,10).intersection(Range.openClosed(10,10))); //EMPTY
+System.out.println(Range.closed(10,10).intersection(Range.closedOpen(10,10))); //EMPTY
+System.out.println(Range.openClosed(10,10).intersection(Range.closed(10,10))); //EMPTY
+System.out.println(Range.openClosed(10,10).intersection(Range.openClosed(10,10))); //EMPTY
+System.out.println(Range.openClosed(10,10).intersection(Range.closedOpen(10,10))); //EMPTY
+System.out.println(Range.closedOpen(10,10).intersection(Range.closed(10,10))); //EMPTY
+System.out.println(Range.closedOpen(10,10).intersection(Range.openClosed(10,10))); //EMPTY
+System.out.println(Range.closedOpen(10,10).intersection(Range.closedOpen(10,10))); //EMPTY</code></pre>
+</div>
